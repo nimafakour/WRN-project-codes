@@ -1,0 +1,28 @@
+fil=input('Enter a txt file: ')
+fh=open(fil)
+gdic=dict()
+tlst=list()
+for lins in fh:
+    if '"'not in lins:
+        continue
+    else:
+        tlins=lins.rstrip()
+        if tlins.startswith('"'):
+            continue
+        else:
+            tar=tlins.find('"')
+            ho=tlins[tar+1:]
+            hos=ho.find('"')
+            host=ho[:hos-1]
+            glst=host.split(',')
+            if len(glst)<3:
+                continue
+            else:
+                for gens in glst:
+                    gdic[gens]=gdic.get(gens,0)+1
+#print(gdic)
+for k,v in gdic.items():
+    tlst.append((v,k))
+    tlst=sorted(tlst,reverse=True)
+for v,k in tlst:
+    print(k,v)
