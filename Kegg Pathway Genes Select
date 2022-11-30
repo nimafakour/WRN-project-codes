@@ -1,14 +1,12 @@
-fil=input('KEGG Pathway file: ')
-fh=open(fil)
+#fil=input('KEGG Pathway file: ')
+fh=open('whgskegg.txt')
+import re
 gdic=dict()
 glst=list()
 for lins in fh:
-    if ';' not in lins:
-        continue
-    else:
-        lins=lins.rstrip()
-        lin=lins.split()
-        tar=lin[-1:]
+    if re.search(';',lins):
+        lin=lins.rstrip()
+        tar=re.findall('\S+;\S+',lin)
         for gens in tar:
             tlst=gens.split(';')
             if len(tlst)<3:
