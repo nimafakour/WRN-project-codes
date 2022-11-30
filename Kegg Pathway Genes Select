@@ -1,0 +1,23 @@
+fil=input('KEGG Pathway file: ')
+fh=open(fil)
+gdic=dict()
+glst=list()
+for lins in fh:
+    if ';' not in lins:
+        continue
+    else:
+        lins=lins.rstrip()
+        lin=lins.split()
+        tar=lin[-1:]
+        for gens in tar:
+            tlst=gens.split(';')
+            if len(tlst)<3:
+                continue
+            else:
+                for gens in tlst:
+                    gdic[gens]=gdic.get(gens,0)+1
+for k,v in gdic.items():
+    glst.append((v,k))
+    glst=sorted(glst,reverse=True)
+for v,k in glst:
+    print(k,v)
